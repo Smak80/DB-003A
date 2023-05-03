@@ -1,14 +1,12 @@
 package ru.smak.database;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DbHelper {
-    private Connection conn;
+    private final Connection conn;
     public DbHelper(String host,
                     int port,
                     String user,
@@ -59,7 +57,9 @@ public class DbHelper {
             user.setLogin(rs.getString("login"));
             try {
                 user.setPassword(rs.getString("password"), false);
-            } catch (Exception e) { }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             users.add(user);
         }
         rs.close();

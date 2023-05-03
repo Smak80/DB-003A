@@ -1,8 +1,6 @@
 import ru.smak.database.Customer;
 import ru.smak.database.DbHelper;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -27,7 +25,9 @@ public class Main {
                 System.out.println(u);
                 try {
                     System.out.println(u.verifyPassword("123456", u.getPassword()));
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (SQLException e) {
             System.out.println("Ошибка: "+e.getMessage());

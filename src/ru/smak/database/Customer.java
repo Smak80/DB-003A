@@ -27,7 +27,7 @@ public class Customer {
         return password;
     }
 
-    public void setPassword(String password, boolean hash) {
+    public void setPassword(String password) {
         /*var iterations = 1000;
         char[] chars = password.toCharArray();
         byte[] salt = getSalt();
@@ -37,8 +37,12 @@ public class Customer {
 
         byte[] hash = skf.generateSecret(spec).getEncoded();
         this.password = iterations + ":" + toHex(salt) + ":" + toHex(hash);*/
-        this.password = (hash) ? SCryptUtil.scrypt(password, 16, 16, 16) : password;
+        this.password = SCryptUtil.scrypt(password, 16, 16, 16);
 
+    }
+
+    public void setHashedPassword(String passwordHash){
+        password = passwordHash;
     }
 
 //    private static byte[] getSalt() throws NoSuchAlgorithmException
@@ -98,7 +102,7 @@ public class Customer {
         setPhone(phone);
         setLogin(login);
         try {
-            setPassword(password, true);
+            setPassword(password);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

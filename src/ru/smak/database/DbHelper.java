@@ -56,7 +56,7 @@ public class DbHelper {
             user.setPhone(rs.getString("phone"));
             user.setLogin(rs.getString("login"));
             try {
-                user.setPassword(rs.getString("password"), false);
+                user.setHashedPassword(rs.getString("password"));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
